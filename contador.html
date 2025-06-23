@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador para el 24 de junio 2025</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: radial-gradient(circle, rgba(60, 0, 255, 1) 0%, rgba(0, 0, 0, 1) 70%);
+            animation: glow-background 1.5s infinite alternate;
+        }
+
+        /* Animación de fondo de neón */
+        @keyframes glow-background {
+            0% {
+                background: radial-gradient(circle, rgba(60, 0, 255, 1) 0%, rgba(0, 0, 0, 1) 70%);
+            }
+            100% {
+                background: radial-gradient(circle, rgba(255, 0, 255, 1) 0%, rgba(0, 0, 0, 1) 70%);
+            }
+        }
+
+        .contador {
+            font-size: 60px;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 1), 0 0 30px rgba(60, 0, 255, 1);
+            backdrop-filter: blur(5px);
+            animation: glow-text 1.5s infinite alternate, bounce-text 1s ease infinite;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Animación de texto de neón */
+        @keyframes glow-text {
+            0% {
+                text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff, 0 0 20px #ff00ff;
+            }
+            100% {
+                text-shadow: 0 0 5px #6a0dad, 0 0 10px #6a0dad, 0 0 15px #6a0dad, 0 0 20px #6a0dad;
+            }
+        }
+
+        /* Animación de rebote */
+        @keyframes bounce-text {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Efecto hover para el contador */
+        .contador:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 0, 255, 1), 0 0 50px rgba(60, 0, 255, 1);
+        }
+
+        #recuento {
+            font-size: 40px;
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+
+        /* Efecto parpadeo en los números */
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contador" id="contador">
+        <p id="recuento">Cargando...</p>
+    </div>
+
+    <script>
+        // Fecha de destino (24 de junio de 2025, 3 PM)
+        var fechaDestino = new Date("Jun 24, 2025 15:00:00").getTime();
+
+        // Actualizar el contador cada segundo
+        var x = setInterval(function() {
+
+            // Obtener la fecha y hora actual
+            var ahora = new Date().getTime();
+
+            // Calcular la distancia entre la fecha actual y la fecha destino
+            var distancia = fechaDestino - ahora;
+
+            // Calcular días, horas, minutos y segundos
+            var dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            var horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            var segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+            // Mostrar el resultado en el elemento con id "recuento"
+            document.getElementById("recuento").innerHTML = dias + "d " + horas + "h "
+            + minutos + "m " + segundos + "s ";
+
+            // Si la cuenta atrás ha terminado, escribir un mensaje
+            if (distancia < 0) {
+                clearInterval(x);
+                document.getElementById("recuento").innerHTML = "¡El evento ha llegado!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
